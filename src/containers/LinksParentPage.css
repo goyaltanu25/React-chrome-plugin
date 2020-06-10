@@ -1,0 +1,13 @@
+.six {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-radius: 38px;
+    background-color:#f9f9f9
+  }
+  .button{
+    padding: 1rem;
+    display: inline-block;
+    font-size: 2rem;
+    cursor: pointer;
+  }
