@@ -1,26 +1,28 @@
 import React, { Component } from "react";
 import { Route, Switch, NavLink } from "react-router-dom";
 
+import "./LinksParentPage.css";
+
 import LinkPage from "../components/LinkPage";
-import Profile from '../containers/Profile/Profile';
+import Profile from "../containers/Profile/Profile";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdWork, MdSchool } from "react-icons/md";
-import { FaHandsHelping } from "react-icons/fa";
+import { FaHandsHelping, FaShareAlt } from "react-icons/fa";
 import { GiSelfLove } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
+
+import Container from "react-bootstrap/Container";
+
 
 import "./LinksParentPage.css";
 
 class LinksParentPage extends React.Component {
-  state = {
-   
-  };
   render() {
     return (
-      <div className="container">
+      <Container fluid>
         <header>
-          <div className="six columns">
+          <div className="nav">
             <NavLink className="button" to="/">
               <BsThreeDotsVertical />
             </NavLink>
@@ -45,7 +47,7 @@ class LinksParentPage extends React.Component {
           <Route path="/" exact component={Profile} />
           <Route path="/:link" component={LinkPage} />
         </Switch>
-      </div>
+      </Container>
     );
   }
 }
