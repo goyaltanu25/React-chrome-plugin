@@ -18,9 +18,19 @@
   cursor: pointer;
 }
 
-.container-fluid{
-  padding:0;
-  margin:0;
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+.portal-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hr-line{
+  margin-top: 0;
+  width: 160px;
+  border: 1px solid #8f3a8a;
 }
 
 

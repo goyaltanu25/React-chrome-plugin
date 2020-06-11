@@ -7,6 +7,11 @@ import Container from "react-bootstrap/Container";
 import './Profile.css';
 
 class Profile extends Component {
+  state={
+    avaterid: null,
+    avatarname: null,
+    avatarimg: '#'
+  }
   render() {
     return (
       <Container fluid>
