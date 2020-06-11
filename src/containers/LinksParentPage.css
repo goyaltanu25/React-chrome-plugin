@@ -1,5 +1,6 @@
 .nav {
   position: fixed;
+  height: 80px;
   top: 0;
   right: 0;
   bottom: auto;
