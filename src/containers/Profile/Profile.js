@@ -4,6 +4,8 @@ import { FaShareAlt } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
+import './Profile.css';
+
 class Profile extends Component {
   render() {
     return (
