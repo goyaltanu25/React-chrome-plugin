@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { BrowserRouter } from "react-router-dom";
 
-import { Route , Switch} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import { NavLink } from "react-router-dom";
@@ -26,7 +26,7 @@ import ExtensionContainer from "./containers/Modals/ExtensionModal/ExtensionCont
 class App extends Component {
   openNewTab(event, route) {
     // console.log(event, route)
-    // event.preventDefault();
+    event.preventDefault();
     window.open(route);
   }
   render() {
@@ -48,7 +48,7 @@ class App extends Component {
                   </NavLink>
                   <NavLink
                     className="button"
-                    to="/workplace-NavLinks"
+                    to="/workplace-links"
                     onClick={(event) =>
                       this.openNewTab(event, "/workplace-links")
                     }
@@ -57,7 +57,7 @@ class App extends Component {
                   </NavLink>
                   <NavLink
                     className="button"
-                    to="/community-NavLinks"
+                    to="/community-links"
                     onClick={(event) =>
                       this.openNewTab(event, "/community-links")
                     }
@@ -66,7 +66,7 @@ class App extends Component {
                   </NavLink>
                   <NavLink
                     className="button"
-                    to="/learning-NavLinks"
+                    to="/learning-links"
                     onClick={(event) =>
                       this.openNewTab(event, "/learning-links")
                     }
@@ -75,7 +75,7 @@ class App extends Component {
                   </NavLink>
                   <NavLink
                     className="button"
-                    to="/personal-NavLinks"
+                    to="/personal-links"
                     onClick={(event) =>
                       this.openNewTab(event, "/personal-links")
                     }
@@ -135,7 +135,6 @@ class App extends Component {
           />
           <Route path="/:link" component={LinkPage} />
         </Switch>
-        {/* <LinksParentPage/> */}
       </BrowserRouter>
     );
   }
