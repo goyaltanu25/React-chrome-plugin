@@ -8,6 +8,11 @@ import { GiSelfLove } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 export default class ExtensionBody extends Component {
+  openNewTab(event, route) {
+    // console.log(event, route)
+    event.preventDefault();
+    window.open(route);
+  }
   render() {
     return (
       <>

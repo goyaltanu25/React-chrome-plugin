@@ -17,8 +17,8 @@ import { Route, Switch } from "react-router-dom";
 import LinkPage from "../src/components/LinkPage";
 import Profile from "./containers/Profile/Profile";
 import NewProfilePortalModal from "./containers/Modals/NewProfileModal/NewProfilePortal";
-import ExtensionBody from '../src/containers/ExtensionBody/ExtensionBody';
-import NewProfileBody from '../src/containers/NewProfileBody/NewProfileBody';
+import ExtensionBody from "../src/containers/ExtensionBody/ExtensionBody";
+import NewProfileBody from "../src/containers/NewProfileBody/NewProfileBody";
 
 import "./App.css";
 // import LinksParentPage from "./containers/LinksParentPage/LinksParentPage";
@@ -26,13 +26,6 @@ import { BrowserRouter } from "react-router-dom";
 import ExtensionContainer from "./containers/Modals/ExtensionModal/ExtensionContainer";
 
 class App extends Component {
-
-  
-  openNewTab(event, route) {
-    // console.log(event, route)
-    event.preventDefault();
-    window.open(route);
-  }
   render() {
     return (
       <BrowserRouter>
