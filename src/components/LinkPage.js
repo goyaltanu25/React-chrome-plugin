@@ -4,7 +4,7 @@ import CommonPage from "../components/CommonPage/commonpage";
 
 import "./linkpage.css";
 
-function linkpage(props) {
+function Linkpage(props) {
   console.log("props", props.match.params.link);
   switch (props.match.params.link) {
     case "workplace-links":
@@ -20,4 +20,4 @@ function linkpage(props) {
   }
 }
 
-export default linkpage;
+export default Linkpage;
