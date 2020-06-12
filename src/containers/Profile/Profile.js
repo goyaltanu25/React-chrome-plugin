@@ -27,11 +27,11 @@ class Profile extends Component {
               </div>
               <div className="profile-right">
                 <div className="social">
-                  <a className="href">
+                  <a className="hre">
                     <span className="counter">0</span>
                     <label className="label">Followers</label>
                   </a>
-                  <a className="href">
+                  <a className="hre">
                     <span className="counter">0</span>
                     <label className="label">Followers</label>
                   </a>

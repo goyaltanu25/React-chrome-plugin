@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Route, Switch, NavLink } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import React, {Component } from "react";
+import { Route, Switch} from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
 
 // import { BsThreeDotsVertical, BsPersonPlusFill } from "react-icons/bs";
 // import { MdWork, MdSchool } from "react-icons/md";
@@ -9,11 +9,11 @@ import { BrowserRouter } from "react-router-dom";
 // import { AiOutlineCloseCircle } from "react-icons/ai";
 
 // import Container from "react-bootstrap/Container";
-import { Button, Form, Navbar } from "react-bootstrap";
+import { Button, Form} from "react-bootstrap";
 
 import "./LinksParentPage.css";
 import NewProfilePortalModal from "../Modals/NewProfileModal/NewProfilePortal";
-import ExtensionContainer from "../Modals/ExtensionModal/ExtensionContainer";
+// import ExtensionContainer from "../Modals/ExtensionModal/ExtensionContainer";
 import LinkPage from "../../components/LinkPage";
 import Profile from "../../containers/Profile/Profile";
 
