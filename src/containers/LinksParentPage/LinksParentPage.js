@@ -21,7 +21,6 @@ class LinksParentPage extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path="/" exact component={ExtensionContainer} />
         <Route path="/profile" component={Profile} />
         <Route
           path="/add-new-profile"
