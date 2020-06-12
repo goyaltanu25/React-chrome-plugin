@@ -55,13 +55,7 @@ class App extends Component {
                   >
                     <MdWork />
                   </NavLink>
-                  <NavLink
-                    className="button"
-                    to="/community-links"
-                    onClick={(event) =>
-                      this.openNewTab(event, "/community-links")
-                    }
-                  >
+                  <NavLink className="button" to="/community-links" onClick={(event) => this.openNewTab(event, "/community-links")}>
                     <FaHandsHelping />
                   </NavLink>
                   <NavLink
