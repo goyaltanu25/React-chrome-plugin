@@ -23,39 +23,31 @@ import NewProfileBody from "../src/containers/NewProfileBody/NewProfileBody";
 import "./App.css";
 // import LinksParentPage from "./containers/LinksParentPage/LinksParentPage";
 import { BrowserRouter } from "react-router-dom";
-import ExtensionContainer from "./containers/Modals/ExtensionModal/ExtensionContainer";
+// import ExtensionContainer from "./containers/Modals/ExtensionModal/ExtensionContainer";
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <Route
-          path="/"
-          exact
-          render={() => {
-            return (
-              <ExtensionContainer>
-                <ExtensionBody />
-              </ExtensionContainer>
-            );
-          }}
-        />
-        <Switch>
-          <Route path="/profile" component={Profile} />
-          <Route
-            path="/add-new-profile"
-            exact
-            render={() => {
-              return (
-                <NewProfilePortalModal>
-                  <NewProfileBody />
-                </NewProfilePortalModal>
-              );
-            }}
-          />
-          <Route path="/:link" component={LinkPage} />
-        </Switch>
-      </BrowserRouter>
+      <>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ExtensionBody} />
+            <Route path="/profile" component={Profile} />
+            <Route
+              path="/add-new-profile"
+              exact
+              render={() => {
+                return (
+                  <NewProfilePortalModal>
+                    <NewProfileBody />
+                  </NewProfilePortalModal>
+                );
+              }}
+            />
+            <Route path="/:link" component={LinkPage} />
+          </Switch>
+        </BrowserRouter>
+      </>
     );
   }
 }

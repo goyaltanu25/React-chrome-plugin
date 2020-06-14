@@ -19,7 +19,7 @@
         "<all_urls>"
       ],
       "js": [
-        "contentfinal.js"
+        "contentfinal_test.js"
       ]
     }
   ],

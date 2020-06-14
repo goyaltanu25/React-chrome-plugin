@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+// import { Route, Switch } from "react-router-dom";
 
 import { BsThreeDotsVertical, BsPersonPlusFill } from "react-icons/bs";
 import { MdWork, MdSchool } from "react-icons/md";
 import { FaHandsHelping } from "react-icons/fa";
 import { GiSelfLove } from "react-icons/gi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+
+// import LinkPage from "../../components/LinkPage";
+// import Profile from "../../containers/Profile/Profile";
+// import NewProfilePortalModal from "../../containers/Modals/NewProfileModal/NewProfilePortal";
+// import ExtensionBody from "../src/containers/ExtensionBody/ExtensionBody";
+// import NewProfileBody from "../NewProfileBody/NewProfileBody";
 
 export default class ExtensionBody extends Component {
   openNewTab(event, route) {
