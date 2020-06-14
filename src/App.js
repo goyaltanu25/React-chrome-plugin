@@ -30,8 +30,9 @@ class App extends Component {
     return (
       <>
         <BrowserRouter>
+        <ExtensionBody/>
           <Switch>
-            <Route exact path="/" component={ExtensionBody} />
+            {/* <Route exact path="/" component={ExtensionBody} /> */}
             <Route path="/profile" component={Profile} />
             <Route
               path="/add-new-profile"

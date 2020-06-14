@@ -13,7 +13,6 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 // import NewProfilePortalModal from "../../containers/Modals/NewProfileModal/NewProfilePortal";
 // import ExtensionBody from "../src/containers/ExtensionBody/ExtensionBody";
 // import NewProfileBody from "../NewProfileBody/NewProfileBody";
-
 export default class ExtensionBody extends Component {
   openNewTab(event, route) {
     // console.log(event, route)
