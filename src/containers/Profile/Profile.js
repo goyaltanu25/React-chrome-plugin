@@ -5,14 +5,19 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
 import './Profile.css';
-
+// const user = useContext(UserContext);
+// const {photoURL, displayName, email} = user;
 class Profile extends Component {
+
   state={
-    avaterid: null,
-    avatarname: null,
-    avatarimg: '#'
+   userid:'',
+   username:'',
+   links:{
+     href:''
+   }
   }
   render() {
+    console.log('props from profilepage', this.props);
     return (
       <Container fluid>
           <div className="gradient-fill"></div>
@@ -33,7 +38,7 @@ class Profile extends Component {
                   </a>
                   <a href="#" className="hre">
                     <span className="counter">0</span>
-                    <label className="label">Followers</label>
+                    <label className="label">Following</label>
                   </a>
                 </div>
                 <div className="icon-buttons">

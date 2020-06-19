@@ -3,7 +3,8 @@ import ReactDom from 'react-dom'
 
 // import './NewProfilePortal.css';
 
-const NewProfilePortalModal= (props) =>{
+const Modal= (props) =>{
+  // console.log('props from modal', props)
    return ReactDom.createPortal(
       <div
         style={{
@@ -42,4 +43,4 @@ const NewProfilePortalModal= (props) =>{
 
 }
 
-export default NewProfilePortalModal;
+export default Modal;
