@@ -1,7 +1,6 @@
 import {ADD_TO_COLLECTIONS} from './collectionType';
 
 const state={
-    collection: []
 }
 
 const collectionReducer = (state,action)=>{
