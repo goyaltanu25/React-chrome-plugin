@@ -7,14 +7,10 @@ import "./linkpage.css";
 function Linkpage(props) {
   console.log("props", props.match.params.link);
   switch (props.match.params.link) {
-    case "workplace-links":
-      return <CommonPage />;
-    case "community-links":
-      return <CommonPage />;
-    case "learning-links":
-      return <CommonPage />;
-    case "personal-links":
-      return <CommonPage />;
+    case "posts":
+      return <CommonPage listname={'Your Posts'}/>;
+    case "collections":
+      return <CommonPage listname={'Your Collections'}/>;
     default:
       return null;
   }

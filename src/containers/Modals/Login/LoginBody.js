@@ -1,70 +1,51 @@
 import React, { Component } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
-import { auth, signInWithGoogle } from "../../../firebase";
+import { login } from "../../../redux/Login/LoginActions";
+import { connect } from "react-redux";
 import "./LoginBody.css";
 
-export default class LoginBody extends Component {
-  state = {
-    email: "",
-    password: "",
-    error: "",
-  };
+class LoginBody extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-  signInWithEmailAndPasswordHandler(event) {
-    // console.log('signin props',this.props);
+  loginHandler(event) {
     event.preventDefault();
     //After Login,navigate to Profilepage
-    auth
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(()=>
-        {
-          this.props.history.push("/profile");
-          console.log(this.props.match.params.name);
-        }
-      )
-      .catch((error) => {
-        this.setState({
-          ...this.state,
-          error: "Error signing in with password and email!",
-        });
-        console.error("Error signing in with password and email", error);
-      });
+    let { email, password } = this.state;
+    this.props.login(email, password, this.props);
   }
-  changeHandler = (event) => {
-    if (event.target.id === "userEmail") {
-      this.setState({
-        ...this.state,
-        email: event.target.value,
-      });
-    } else if (event.target.id === "userPassword") {
-      this.setState({
-        ...this.state,
-        password: event.target.value,
-      });
-    }
-  };
+
   render() {
+    let { isLoginPending, isLoginSuccess, isLoginError } = this.props;
     return (
       <>
         <Form className="portal-form">
           <h3 style={{ textAlign: "center" }}> Login Here</h3>
           <hr className="hr-line" />
-          {this.state.error ? <Alert variant='danger'>{this.state.error}</Alert>: null}
+          {isLoginPending && <Alert variant="primary">Login Please.</Alert>}
+          {isLoginSuccess && (
+            <Alert variant="success">Successfully Logged-In</Alert>
+          )}
+          {isLoginError && (
+            <Alert variant="danger">{isLoginError.message}</Alert>
+          )}
           <Form.Group controlId="userEmail">
             <Form.Label>Your Email :</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter Your Email"
-              onChange={this.changeHandler}
+              onChange={(e) => this.setState({ email: e.target.value })}
             />
           </Form.Group>
           <Form.Group controlId="userPassword">
-            <Form.Label>Avatar Password</Form.Label>
+            <Form.Label>Password :</Form.Label>
             <Form.Control
               required
               type="password"
               placeholder="Enter your Password"
-              onChange={this.changeHandler}
+              onChange={(e) => this.setState({ password: e.target.value })}
             />
           </Form.Group>
         </Form>
@@ -74,19 +55,35 @@ export default class LoginBody extends Component {
             type="submit"
             variant="primary"
             onClick={(event) => {
-              this.signInWithEmailAndPasswordHandler(event);
+              this.loginHandler(event);
             }}
           >
             Login
           </Button>
           <Alert.Link>Forgot Password?</Alert.Link>
-          or
+          {/* or
           <Button variant="danger" block 
-          onClick={signInWithGoogle}>
+          onClick={this.signInHandler(event)}>
             Login with Google
-          </Button>
+          </Button> */}
         </div>
       </>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLoginPending: state.loginreducer.isLoginPending,
+    isLoginSuccess: state.loginreducer.isLoginSuccess,
+    isLoginError: state.loginreducer.isLoginError,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (email, password, props) => dispatch(login(email, password, props)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginBody);

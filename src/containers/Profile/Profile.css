@@ -1,8 +1,11 @@
-
+a:hover{
+  color: black;
+  text-decoration: none;
+}
 .gradient-fill {
   background-color: #a4508b;
   background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
-  height: 250px;
+  height: 150px;
 }
 
 .profile-container {
@@ -86,6 +89,19 @@
 .custom-btn{
   font-size: 2rem;
   padding: 1rem;
+}
+
+.tabs{
+  display: inline-block;
+  padding:1rem;
+  color: black;
+}
+
+.tabs.active::after{
+     display: flex;
+     content: "";
+     width: 56px;
+     border-bottom: 2px solid #5f0a87;
 }
 
 @media only screen and (max-width: 780px) {

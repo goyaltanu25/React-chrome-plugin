@@ -1,87 +1,44 @@
 import React, { Component } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
-import {
-  auth,
-  signInWithGoogle,
-  generateUserDocument,
-} from "../../../firebase";
+import { connect } from "react-redux";
+import { signup } from "../../../redux/Signup/SignupActions";
 
-export default class Signup extends Component {
-  state = {
-    email: "",
-    password: "",
-    additionalData: {
-      displayName: "",
-      src: "",
-    },
-  };
-  createUserWithEmailAndPasswordHandler = async (event) => {
+class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  SignupHandler = (event) => {
     // console.log("coming from signup", this.state);
     event.preventDefault();
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        this.state.email,
-        this.state.password
-      );
-      // console.log("additionaldata", this.state.additionalData);
-      generateUserDocument(user, this.state.additionalData);
-      this.props.history.push("/profile");
-    } catch (error) {
-      this.setState({
-        ...this.state,
-        error: "Error Signing up with email and password",
-      });
-    }
-    this.setState({
-      email: "",
-      password: "",
-      additionalData: "",
-    });
-  };
-
-  onChangeHandler = (event) => {
-    console.log(event.target);
-    if (event.target.id === "userEmail") {
-      this.setState({
-        ...this.state,
-        email: event.target.value,
-      });
-    } else if (event.target.id === "userName") {
-      this.setState({
-        ...this.state,
-        additionalData: {
-          ...this.state.additionalData,
-          displayName: event.target.value,
-        },
-      });
-    } else if (event.target.id === "userImg") {
-      // console.log(event.target);
-      this.setState({
-        ...this.state,
-        additionalData: {
-          ...this.state.additionalData,
-          src: event.target.value,
-        },
-      });
-    } else if (event.target.id === "userPassword") {
-      this.setState({
-        ...this.state,
-        password: event.target.value,
-      });
-    }
+    let { email, password, displayName, src } = this.state;
+    this.props.signup(email, password, displayName, src, this.props);
+    console.log("signup props", this.props);
   };
   render() {
+    let { isSignupSuccess, isSignupError } = this.props;
+    console.log("signupprops", this.props);
     return (
       <>
         <Form className="portal-form">
           <h3 style={{ textAlign: "center" }}> Signup Details</h3>
           <hr className="hr-line" />
+          {isSignupSuccess && (
+            <Alert variant="success">Successfully Signed Up!!</Alert>
+          )}
+          {isSignupError ? (
+            <Alert variant="danger">{isSignupError.message}</Alert>
+          ) : null}
           <Form.Group controlId="userEmail">
             <Form.Label>Email:</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter your Email"
-              onChange={(event) => this.onChangeHandler(event)}
+              onChange={(event) =>
+                this.setState({
+                  email: event.target.value,
+                })
+              }
             />
           </Form.Group>
           <Form.Group controlId="userName">
@@ -89,7 +46,11 @@ export default class Signup extends Component {
             <Form.Control
               type="text"
               placeholder="Enter your Display Name"
-              onChange={(event) => this.onChangeHandler(event)}
+              onChange={(event) =>
+                this.setState({
+                  displayName: event.target.value,
+                })
+              }
             />
           </Form.Group>
           <Form.Group controlId="userImg">
@@ -98,7 +59,11 @@ export default class Signup extends Component {
               required
               type="file"
               placeholder="Upload file"
-              onChange={(event) => this.onChangeHandler(event)}
+              onChange={(event) =>
+                this.setState({
+                  src: event.target.value,
+                })
+              }
             />
           </Form.Group>
           <Form.Group controlId="userPassword">
@@ -107,7 +72,11 @@ export default class Signup extends Component {
               required
               type="password"
               placeholder="Enter Your Password"
-              onChange={(event) => this.onChangeHandler(event)}
+              onChange={(event) =>
+                this.setState({
+                  password: event.target.value,
+                })
+              }
             />
           </Form.Group>
         </Form>
@@ -118,19 +87,35 @@ export default class Signup extends Component {
             variant="primary"
             block
             onClick={(event) => {
-              this.createUserWithEmailAndPasswordHandler(event);
+              this.SignupHandler(event);
             }}
           >
             Signup
           </Button>
           <br />
           <Alert.Link>Back to Login </Alert.Link>
-          <br />
+          {/* <br />
           <Button variant="danger" onClick={signInWithGoogle} block>
             Login with Google
-          </Button>
+          </Button> */}
         </div>
       </>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isSignupSuccess: state.signupReducer.isSignupSuccess,
+    isSignupError: state.signupReducer.isSignupError,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signup: (email, password, displayName, src, props) =>
+    dispatch(signup(email, password, displayName, src, props)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

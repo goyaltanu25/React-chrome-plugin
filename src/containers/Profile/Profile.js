@@ -1,34 +1,45 @@
 import React, { Component } from "react";
-
-import { FaShareAlt } from "react-icons/fa";
+import { NavLink, Route } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import { FaShareAlt } from "react-icons/fa";
+import { connect } from "react-redux";
+import "./Profile.css";
+import Linkpage from "../../components/LinkPage";
 
-import './Profile.css';
-// const user = useContext(UserContext);
-// const {photoURL, displayName, email} = user;
 class Profile extends Component {
-
-  state={
-   userid:'',
-   username:'',
-   links:{
-     href:''
-   }
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
   render() {
-    console.log('props from profilepage', this.props);
+    let { userDetails } = this.props;
+    // console.log(this.props,userDetails);
+
     return (
-      <Container fluid>
+      <>
+        <Container fluid>
           <div className="gradient-fill"></div>
           <div className="profile-container">
             <div className="profile-content">
               <div className="profile-left">
-                <div className="profile-img"></div>
-                <div className="userdetails-">
-                  <div className="userid">@tanugoyal</div>
-                  <div className="username">Tanu Goyal</div>
-                </div>
+                {userDetails ? (
+                  <>
+                    <div className="profile-img" alt={userDetails.src}></div>
+                    <div className="userdetails-">
+                      <div className="userid">{userDetails.email}</div>
+                      <div className="username">{userDetails.displayName}</div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="profile-img" alt="test-img"></div>
+                    <div className="userdetails-">
+                      <div className="userid">testid</div>
+                      <div className="username">testName</div>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="profile-right">
                 <div className="social">
@@ -53,8 +64,25 @@ class Profile extends Component {
             </div>
           </div>
         </Container>
-    )
+        <Container>
+          <NavLink className="tabs" to="/profile/posts">
+            <span>POSTS</span>
+          </NavLink>
+          <NavLink className="tabs" to="/profile/collections">
+          <span>COLLECTIONS</span>
+          </NavLink>
+          <hr/>
+          <Route path="/profile/:link" component={Linkpage} />
+        </Container>
+      </>
+    );
   }
 }
 
-export default Profile;
+const mapStateToProps = (state) => {
+  return {
+    userDetails: state.loginreducer.userData,
+  };
+};
+
+export default connect(mapStateToProps)(Profile);

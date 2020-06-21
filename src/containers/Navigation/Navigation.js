@@ -1,119 +1,105 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
 import { Route, Switch, NavLink } from "react-router-dom";
-import LinkPage from "../../components/LinkPage";
 import Profile from "../Profile/Profile";
 import Modal from "../Modals/Modal";
 import Signup from "../Modals/Signup/Signup";
 import LoginBody from "../Modals/Login/LoginBody";
-
+import { logout } from "../../redux/Login/LoginActions";
 import { BsFillPersonFill, BsPersonPlusFill } from "react-icons/bs";
-import { MdWork, MdSchool } from "react-icons/md";
-import { FaHandsHelping } from "react-icons/fa";
-import { GiSelfLove } from "react-icons/gi";
-import {
-  AiOutlineCloseCircle,
-  AiOutlineLogin,
-  AiOutlineLogout,
-} from "react-icons/ai";
 
+import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import "./Navigation.css";
 
-export default class Navigation extends Component {
-  componentDidMount() {}
-  closebtnHandler() {}
+class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  logoutHandler = () =>{
+    this.props.logout();
+  }
+
   render() {
-    // console.log(this.props.checklogin);
+    let { isUserLoggedIn } = this.props;
+    // console.log('nav window', this.props);
     return (
-        <div className="nav">
-          <>
-            <NavLink
-              className="button"
-              to="/"
-              // onClick={(event) => this.openNewTab(event, "/add-new-profile")}
-            >
-              <AiOutlineLogin />
-            </NavLink>
-            <NavLink
-              className="button"
-              to="/profile"
-              // onClick={(event) => this.openNewTab(event, "/profile")}
-            >
-              <BsFillPersonFill />
-            </NavLink>
-            <NavLink
-              className="button"
-              to="/workplace-links"
-              // onClick={(event) => this.openNewTab(event, "/workplace-links")}
-            >
-              <MdWork />
-            </NavLink>
-            <NavLink
-              className="button"
-              to="/community-links"
-              // onClick={(event) => this.openNewTab(event, "/community-links")}
-            >
-              <FaHandsHelping />
-            </NavLink>
-            <NavLink
-              className="button"
-              to="/learning-links"
-              // onClick={(event) => this.openNewTab(event, "/learning-links")}
-            >
-              <MdSchool />
-            </NavLink>
-            <NavLink
-              className="button"
-              to="/personal-links"
-              // onClick={(event) => this.openNewTab(event, "/personal-links")}
-            >
-              <GiSelfLove />
-            </NavLink>
-            <NavLink
-              className="button"
-              to="/logout"
-              // onClick={(event) => this.openNewTab(event, "/personal-links")}
-            >
-              <AiOutlineLogout />
-            </NavLink>
-            <NavLink
-              className="button"
-              to="/add-new-profile"
-              // onClick={(event) => this.openNewTab(event, "/add-new-profile")}
-            >
-              <BsPersonPlusFill />
-            </NavLink>
-            <NavLink to="#" className="button">
-              <AiOutlineCloseCircle onClick={this.closebtnHandler} />
-            </NavLink>
-          </>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(routeProps) => {
-                return (
-                  <Modal>
-                    <LoginBody {...routeProps}/>
-                  </Modal>
-                );
-              }}
-            />
-            <Route path="/profile" component={Profile} />
-            <Route
-              path="/add-new-profile"
-              exact
-              render={(routeProps) => {
-                return (
-                  <Modal>
-                    <Signup {...routeProps} />
-                  </Modal>
-                );
-              }}
-            />
-            <Route path="/:link" component={LinkPage} />
-          </Switch>
-        </div>
+      <div className="nav">
+        <>
+          {!isUserLoggedIn ? (
+            <>
+              <NavLink className="button" to="/">
+                <AiOutlineLogin />
+              </NavLink>
+              <NavLink className="button" to="/add-new-profile">
+                <BsPersonPlusFill />
+              </NavLink>
+            </>
+          ) : (
+            <>
+              {/* <NavLink className="button" to="/profile">
+                <BsFillPersonFill />
+              </NavLink> */}
+              <NavLink className="button" to="/profile/posts">
+                <BsFillPersonFill />
+              </NavLink>
+              <NavLink className="button" to="/" onClick={this.logoutHandler}>
+                <AiOutlineLogout />
+              </NavLink>
+            </>
+          )}
+        </>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={(routeProps) => {
+              return (
+                <Modal>
+                  <LoginBody {...routeProps} />
+                </Modal>
+              );
+            }}
+          />
+           <Route
+            exact
+            path="/login"
+            render={(routeProps) => {
+              return (
+                <Modal>
+                  <LoginBody {...routeProps} />
+                </Modal>
+              );
+            }}
+          />
+          <Route path="/profile" component={Profile} />
+          <Route
+            path="/add-new-profile"
+            exact
+            render={(routeProps) => {
+              return (
+                <Modal>
+                  <Signup {...routeProps} />
+                </Modal>
+              );
+            }}
+          />
+        </Switch>
+      </div>
     );
   }
 }
+const mapStateToProps = (state) => {
+  // console.log(state.loginreducer.isUserLoggedIn);
+  return {
+    isUserLoggedIn: state.loginreducer.isUserLoggedIn
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
