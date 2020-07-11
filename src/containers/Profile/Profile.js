@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { FaShareAlt } from "react-icons/fa";
 import { connect } from "react-redux";
-import "./Profile.css";
+import  "./Profile.css";
 import Linkpage from "../../components/LinkPage";
 
 class Profile extends Component {
@@ -28,7 +28,7 @@ class Profile extends Component {
                     <div className="profile-img" alt={userDetails.src}></div>
                     <div className="userdetails-">
                       <div className="userid">{userDetails.email}</div>
-                      <div className="username">{userDetails.displayName}</div>
+                      <div className="username"><strong>{userDetails.displayName}</strong></div>
                     </div>
                   </>
                 ) : (
@@ -36,13 +36,13 @@ class Profile extends Component {
                     <div className="profile-img" alt="test-img"></div>
                     <div className="userdetails-">
                       <div className="userid">testid</div>
-                      <div className="username">testName</div>
+                      <div className="username"><strong>testName</strong></div>
                     </div>
                   </>
                 )}
               </div>
               <div className="profile-right">
-                <div className="social">
+                {/* <div className="social">
                   <div className="hre">
                     <span className="counter">0</span>
                     <label className="label">Followers</label>
@@ -51,7 +51,7 @@ class Profile extends Component {
                     <span className="counter">0</span>
                     <label className="label">Following</label>
                   </div>
-                </div>
+                </div> */}
                 <div className="icon-buttons">
                   <div className="custom-btn">
                     <FaShareAlt />

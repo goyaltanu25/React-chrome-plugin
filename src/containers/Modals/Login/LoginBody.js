@@ -17,6 +17,10 @@ class LoginBody extends Component {
     this.props.login(email, password, this.props);
   }
 
+  forgotPassword(event){
+    event.preventDefault();
+  }
+
   render() {
     let { isLoginPending, isLoginSuccess, isLoginError } = this.props;
     return (
@@ -54,13 +58,11 @@ class LoginBody extends Component {
             style={{ margin: "0rem 9rem" }}
             type="submit"
             variant="primary"
-            onClick={(event) => {
-              this.loginHandler(event);
-            }}
+            onClick={(event) => {this.loginHandler(event)}}
           >
             Login
           </Button>
-          <Alert.Link>Forgot Password?</Alert.Link>
+          <Alert.Link onClick={(event)=>this.forgotPassword(event)}>Forgot Password?</Alert.Link>
           {/* or
           <Button variant="danger" block 
           onClick={this.signInHandler(event)}>
